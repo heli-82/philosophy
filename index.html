@@ -1,1 +1,175 @@
-hello :3
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Блоки с привязкой и ряд блоков</title>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            background-color: #121212;
+            color: #e0e0e0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        main {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .block {
+            margin-bottom: 20px;
+            padding: 20px;
+            box-sizing: border-box;
+            background-color: #1e1e1e;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .left {
+            align-self: flex-start;
+            width: fit-content;
+        }
+
+        .right {
+            align-self: flex-end;
+            width: fit-content;
+        }
+
+        .center {
+            align-self: center;
+            width: fit-content;
+        }
+
+        .image-text {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .image-text img {
+            max-width: 40%;
+            height: auto;
+            margin-right: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .image-text .text {
+            flex-grow: 1;
+        }
+
+        .block h2 {
+            color: #bb86fc;
+            margin-bottom: 10px;
+        }
+
+        audio {
+            width: 100%;
+            max-width: 400px;
+            margin: 20px auto;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            background-color: #bb86fc;
+            color: #e0e0e0;
+            display: block;
+        }
+
+        /* Стили для ряда блоков */
+        .row-container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin: 20px auto;
+            max-width: 1200px;
+        }
+
+        .row-block {
+            background-color: #1e1e1e;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            box-sizing: border-box;
+            width: calc(33.33% - 20px);
+            margin: 10px;
+            text-align: center;
+        }
+
+        footer {
+            background-color: #1e1e1e;
+            padding: 10px;
+            text-align: center;
+            color: #757575;
+        }
+
+        @media (max-width: 768px) {
+            .image-text {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .image-text img {
+                max-width: 100%;
+                margin-bottom: 10px;
+                margin-right: 0;
+            }
+            .row-block{
+                width: calc(100% - 20px);
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header><nav></nav></header>
+    <main>
+        <div class="block left image-text">
+            <img src="y.png" alt="Описание изображения 1">
+            <div class="text">
+                <h2>Левый блок с изображением</h2>
+                <p>Текст слева.</p>
+            </div>
+        </div>
+
+        <div class="block right">
+            <h2>Правый блок с медиаплеером</h2>
+            <audio controls>
+                <source src="путь_к_вашему_аудиофайлу.mp3" type="audio/mpeg">
+                Ваш браузер не поддерживает элемент audio.
+            </audio>
+        </div>
+
+        <div class="block center">
+            <h2>Центральный блок только с текстом</h2>
+            <p>Этот блок привязан к центру.</p>
+        </div>
+        <h2>Блоки в один ряд</h2>
+        <div class="row-container">
+            <div class="row-block">
+                <h3>Блок 1</h3>
+                <p>Текст блока 1.</p>
+            </div>
+            <div class="row-block">
+                <h3>Блок 2</h3>
+                <p>Текст блока 2.</p>
+            </div>
+            <div class="row-block">
+                <h3>Блок 3</h3>
+                <p>Текст блока 3.</p>
+            </div>
+            <div class="row-block">
+                <h3>Блок 4</h3>
+                <p>Текст блока 4.</p>
+            </div>
+        </div>
+    </main>
+    <footer><p>&copy; 2023 Мой сайт</p></footer>
+</body>
+</html>
