@@ -28,7 +28,7 @@ main {
     display: flex;
     flex-direction: column;
     align-items: stretch;
-    padding: 20px;
+    padding: 20px; /* Убираем 5%, чтобы margin работал корректно */
     box-sizing: border-box;
 }
 
@@ -69,7 +69,8 @@ main {
 }
 
 .image-text img {
-    max-width: 40%; /* Максимум 40% ширины родителя */
+    min-width: 500px;
+    max-width: 40%;
     height: auto;
     margin-bottom: 10px;
     border-radius: 8px;
@@ -121,26 +122,38 @@ audio {
     margin-bottom: 10px;
 }
 
-/* Стили для контейнера карточек */
 .card-container {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     margin: 20px auto;
-    max-width: 1200px;
+    max-width: 100%;
+    box-sizing: border-box;
 }
 
-/* Стили для карточек */
+.same-line {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+}
+
+.same-line .card-container {
+    max-width: 70%;
+}
+
 .card {
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: rgba(255, 255, 255, 0.05);
     backdrop-filter: blur(10px);
     border-radius: 16px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
     padding: 20px;
     box-sizing: border-box;
     margin: 10px;
-    flex: 1 0 300px;
+    flex: 1 1 0;
+    min-width: 300px;
     overflow: hidden;
     display: flex;
     flex-direction: column;
@@ -157,6 +170,44 @@ audio {
     font-size: 1.2em;
 }
 
+/* Стили для первой карточки в ряду */
+.card-container .card.first {
+    flex-basis: 100%; /* Занимает всю ширину */
+    min-width: 0; /* Отменяем min-width для первой карточки */
+}
+
+/* Стили для второй и третьей карточек, если первая с изображением */
+.card-container .card.first.image-text + .card,
+.card-container .card.first.image-text + .card + .card { /*стили для 3 карточки*/
+    flex-basis: calc(50% - 10px); /* Делят оставшееся пространство пополам */
+}
+.card-container .card.first.image-text + .card .image-text img{
+    display: none;
+}
+.right-image{
+    float: right;
+    max-width: 30%;
+    margin-left: 20px;
+}
+.same-line {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+}
+.same-line .card-container {
+    max-width: 65%;
+}
+.same-line .block {
+    width: 30%;
+}
+.card-container .card{
+    margin-bottom: 10px;
+}
+.card-container .card:last-child{
+    margin-bottom: 0px;
+}
 /* Медиа-запросы */
 @media (min-width: 768px) {
     .card.image-text {
@@ -165,26 +216,47 @@ audio {
     }
 
     .card.image-text img {
-        max-width: 40%; /* Максимум 40% ширины родителя на больших экранах */
+        max-width: 40%;
         margin-right: 20px;
         margin-bottom: 0;
     }
+    .same-line .block{
+        width: 30%;
+    }
 }
 
-@media (max-width: 767px) { /* Для мобильных устройств */
+@media (max-width: 767px) {
     .image-text img {
-        max-width: 100%; /* Изображение занимает всю ширину на мобильных */
-        margin-right: 0; /* Убираем отступ справа */
+        max-width: 100%;
+        margin-right: 0;
         margin-bottom: 10px;
     }
-    .card{
+
+    .card {
         flex: 1 0 90%;
+        min-width: 0;
+    }
+
+    .same-line {
+        flex-direction: column;
+    }
+
+    .same-line .block {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .same-line .card-container {
+        max-width: 100%;
+    }
+    .card-container .card{
+        flex-basis: 100%;
+    }
+    .card-container .card.first + .card{
+        margin-top: 10px;
     }
 }
 
-img {
-    max-width: 1000px;
-}
 
 footer {
     background-color: rgba(0, 0, 0, 0.3);
