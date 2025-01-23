@@ -23,6 +23,10 @@ body::before {
     z-index: -1;
 }
 
+a:link {
+    color: #dfcaf8;
+}
+
 main {
     flex-grow: 1;
     display: flex;
